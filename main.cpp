@@ -38,11 +38,33 @@ int main()
                 if(i==0)
                 {
                     bmp1.open(pic);
-                    work.push_back(bmp.toPixelMatrix());
+                    work.resize(i+1);
+                    vector < vector < Pixel > > test;
+                    test = bmp.toPixelMatrix();
+                    work[i].resize(test.size());
+                    for(int x=0; x < test.size(); x++)
+                    {
+                        work[i][x].resize(test[0].size());
+                        for( int y=0; y < test[0].size(); y++)
+                        {
+                            work[i][x][y] = test[x][y];
+                        }
+                    }
                 }
                 else if( isValid( bmp1 , bmp))
                 {
-                    work.push_back(bmp.toPixelMatrix());
+                    work.resize(i+1);
+                    vector < vector < Pixel > > test;
+                    test = bmp.toPixelMatrix();
+                    work[i].resize(test.size());
+                    for(int x=0; x < test.size(); x++)
+                    {
+                        work[i][x].resize(test[0].size());
+                        for( int y=0; y < test[0].size(); y++)
+                        {
+                            work[i][x][y] = test[x][y];
+                        }
+                    }
                 }
                 else
                 {
