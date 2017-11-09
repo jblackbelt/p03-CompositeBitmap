@@ -12,7 +12,7 @@ go throut  each row and collum of each bitmap at the same time and assign an ave
 ave an output a bmp file*/
 
 // recive #of row and collum and output progress in % complete
-void progress(double, double);
+void progress(double, double , int , int);
 // recive the refrence of the bitmap first bitmap and compares to the rest of the imputs
 bool isValid(Bitmap &, Bitmap &);
 
@@ -81,20 +81,20 @@ int main()
             break;
         }
     }
-    int temp1 = work.size();
-    int temp2 = work[0].size();
+    int temp1 = work[0].size();
+    int temp2 = work[0][0].size();
     vector < vector < Pixel > > avg;
     avg.resize(temp1);
-    for( int i = 0; i < work.size(); i++)
-    {
-        avg[i].resize(temp2);
-        double averager = 0;
-        double averageg = 0;
-        double averageb = 0;
-        Pixel rgb;
-        for( int x = 0; x < work[i].size(); x++)
-        {   
-            for( int y = 0; y < work[i][x].size(); y++)
+    for( int x = 0; x < work[0].size(); x++)
+    {   
+        avg[x].resize(temp2);
+        for( int y = 0; y < work[0][0].size(); y++)
+        {
+            double averager = 0;
+            double averageg = 0;
+            double averageb = 0;
+            Pixel rgb;
+            for( int i = 0; i < work.size(); i++)
             {
                 rgb = work[i][x][y];
                 averager += rgb.red;
@@ -103,14 +103,14 @@ int main()
 
 
             }
-            averager = averager / work[0][0].size()-1;
-            averageg = averageg / work[0][0].size()-1;
-            averageb = averageb / work[0][0].size()-1;
+            averager = averager / work.size();
+            averageg = averageg / work.size();
+            averageb = averageb / work.size();
             rgb.red = averager;
             rgb.green = averageg;
             rgb.blue = averageb;
-            avg[i][x]= rgb;
-            progress((i+1)/work.size() , (x+1)/work[0].size());
+            avg[x][y]= rgb;
+            progress( x , y ,  work[0].size() ,  work[0][0].size());
 
         }
 
@@ -121,9 +121,9 @@ int main()
     end.save("Composite-jwest27.bmp");
 }
 
-void progress( double row, double col)
+void progress( double row, double col , int rmax , int cmax)
 {
-    cout << row * col << "% " << "Compleate.\n";
+    cout << (row*cmax + col)/(rmax * cmax)*100 << "% " << "Compleate.\n";
 }
 
 
