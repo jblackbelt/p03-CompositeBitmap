@@ -142,12 +142,14 @@ bool isValid( Bitmap & bmp1, Bitmap & bmp)
         }
         else
         {
+            cout << "Error. Picture has a different size!!!!!!!!!\n";
             return false;
         }
 
     }
     else
     {
+        cout << "Error. Picture has a different size!!!!!!!!!\n";
         return false;
     }
 }
