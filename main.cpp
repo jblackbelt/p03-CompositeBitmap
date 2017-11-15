@@ -116,6 +116,7 @@ int main()
 
 
     }
+    cout << "Mission compreet!\n";
     Bitmap end;
     end.fromPixelMatrix(avg);
     end.save("Composite-jwest27.bmp");
